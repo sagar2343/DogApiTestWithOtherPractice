@@ -69,17 +69,27 @@ class _PetsHomeScreenState extends State<PetsHomeScreen> {
   }
 
   Widget getBodyUi(PetsModel pets) {
-    return ListView.builder(
-      itemCount: pets.data!.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(pets.data![index].petImage.toString()),
-          ),
-          title: Text(pets.data![index].userName.toString()),
-          trailing: pets.data![index].isFriendly == true ? const Icon(Icons.gpp_good) : const Icon(Icons.dangerous),
+    return FutureBuilder(
+      future: Provider.of<PetsProvider>(context).getDataFromApi(),
+      builder:(context, snapshot) {
+        return snapshot.connectionState == ConnectionState.waiting
+            ?
+        const Center(child: CircularProgressIndicator())
+            :
+        ListView.builder(
+          itemCount: pets.data!.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(pets.data![index].petImage.toString()),
+              ),
+              title: Text(pets.data![index].userName.toString()),
+              trailing: pets.data![index].isFriendly == true ? const Icon(Icons.gpp_good) : const Icon(Icons.dangerous),
+            );
+          },
         );
       },
+
     );
   }
 }

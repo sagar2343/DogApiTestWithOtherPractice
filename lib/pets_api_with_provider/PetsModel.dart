@@ -15,9 +15,7 @@ class PetsModel {
     }
   }
   List<Data>? _data;
-PetsModel copyWith({  List<Data>? data,
-}) => PetsModel(  data: data ?? _data,
-);
+  PetsModel copyWith({ List<Data>? data }) => PetsModel( data: data ?? _data );
   List<Data>? get data => _data;
 
   Map<String, dynamic> toJson() {

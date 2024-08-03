@@ -6,8 +6,7 @@ import 'package:http/http.dart';
 import 'package:test4/pets_api_with_provider/PetsModel.dart';
 
 class PetsProvider with ChangeNotifier {
-  static const apiEndpoint =
-      'https://jatinderji.github.io/users_pets_api/users_pets.json';
+  static const apiEndpoint = 'https://jatinderji.github.io/users_pets_api/users_pets.json';
   bool isLoading = true;
   String error = '';
   PetsModel pets = PetsModel(data: []);

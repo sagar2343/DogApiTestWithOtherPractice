@@ -1,9 +1,6 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/post_model.dart';
 
 class HomePostApiScreen extends StatefulWidget {
@@ -43,8 +40,13 @@ class _HomePostApiScreenState extends State<HomePostApiScreen> {
             child: FutureBuilder(
                 future: getPostApi(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: Text('Loading...'));
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: Column(
+                      children: [
+                        CircularProgressIndicator(),
+                        Text('Loading...'),
+                      ],
+                    ));
                   } else {
                     return ListView.builder(
                         itemCount: postList.length,
